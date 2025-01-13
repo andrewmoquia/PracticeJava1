@@ -1,6 +1,8 @@
 package com.test;
 import com.test.components.BankAccount;
+import com.test.components.Duck;
 import com.test.components.Manager;
+import com.test.enums.GameLevels;
 import com.test.utilities.Debug;
 import java.util.Scanner;
 
@@ -68,6 +70,14 @@ public class Main {
         account.withdraw(50);
         transaction = account.createTransaction("Withdraw", 50);
         transaction.printTransaction();
+
+        // Using enums
+        GameLevels level = GameLevels.EASY;
+        System.out.println("Game level is: " + level);
+
+        // Using interfaces
+        Duck myDuck = new Duck();
+        myDuck.fly();
     }
     public static void PackageFunc() {
         Scanner myScanner = new Scanner(System.in);
