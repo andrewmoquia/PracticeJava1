@@ -1,10 +1,15 @@
 package com.test;
-import com.test.components.BankAccount;
-import com.test.components.Duck;
-import com.test.components.Manager;
+import com.test.components.*;
 import com.test.enums.GameLevels;
+import com.test.services.TaskScheduler;
+import com.test.utilities.Date;
 import com.test.utilities.Debug;
-import java.util.Scanner;
+import com.test.utilities.StringHelper;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Main {
 
@@ -78,7 +83,62 @@ public class Main {
         // Using interfaces
         Duck myDuck = new Duck();
         myDuck.fly();
+
+        // Get local date
+        LocalDateTime date = Date.GetLocalDateTime();
+        Debug.log(StringHelper.stringify(date));
+
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = date.format(myFormatObj);
+        Debug.log(formattedDate);
+
+        // Array list - 1 dimension
+        ArrayList<String> cars = new ArrayList<>();
+        cars.add("Volvo");
+        cars.add("Toyota");
+        cars.add(1, "Suzuki");
+
+        Collections.sort(cars);
+        for (String myCar: cars) {
+            Debug.log(myCar);
+        }
+
+        // Using LinkedList as a Queue to manage tasks
+        TaskScheduler createTask = new TaskScheduler();
+        createTask.AddTask("Process Data", 1);
+        createTask.AddTask("Send Email", 2);
+
+        createTask.CheckProcessingTask();
+
+        // Linkedlist
+        SimpleLinkedListExample.run();
+
+        // Hashmap Example
+        HashMapExample.run();
+
+        // Hashset Example
+        HashSetExample.run();
+
+        // Wrapper Classes
+        UserProfile user1 = new UserProfile(null, "john.doe@example.com", 25, "123 Main St", 2);
+        user1.displayProfile();
+
+        // Exception Handling
+        ExceptionHandlingSample.SampleOne();
+        ExceptionHandlingSample.SampleWithFinal();
+        ExceptionHandlingSample.SampleWithThrow(20);
+
+        // RegEx
+        RegExSample.run();
+
+        // Thread
+        GameServer.startBattle("John", "Andrew");
+        GameServer.startBattle("A", "B");
+        GameServer.startBattle("C", "D");
+
+        GameServer.shutdownServer();
     }
+
     public static void PackageFunc() {
         Scanner myScanner = new Scanner(System.in);
 
@@ -230,7 +290,6 @@ public class Main {
         // Special Characters
         String password = "1231ad#41\'\\";
         System.out.println("password: " + password);
-
     }
 
     public static void Operators() {
