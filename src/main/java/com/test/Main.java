@@ -4,12 +4,15 @@ import com.test.enums.GameLevels;
 import com.test.services.TaskScheduler;
 import com.test.utilities.Date;
 import com.test.utilities.Debug;
+import com.test.utilities.SortByYear;
 import com.test.utilities.StringHelper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class Main {
 
@@ -137,6 +140,44 @@ public class Main {
         GameServer.startBattle("C", "D");
 
         GameServer.shutdownServer();
+
+        // Lambda func
+        List<String> list = Arrays.asList("Apple", "Banana", "Cherry");
+        list.forEach(item -> System.out.println(item));  // Outputs each item in the list
+
+        Runnable r = () -> System.out.println("Hello, Lambda!");
+        r.run();  // Outputs: Hello, Lambda!
+
+        Function<Integer, Integer> square = (x) -> x * x;
+        System.out.println(square.apply(5));
+
+        BiFunction<String, String, String> combineName = (x, y) -> x + y;
+        System.out.println(combineName.apply("John", "Andrew"));
+
+        // Advance Sorting
+        ArrayList<AutoMobile> myAuto = new ArrayList<AutoMobile>();
+        myAuto.add(new AutoMobile("BMW", "X5", 1999));
+        myAuto.add(new AutoMobile("Ford", "Mustang", 1970));
+        myAuto.add(new AutoMobile("Honda", "Accord", 2006));
+
+        // Use a Comparator to sort the cars
+        Comparator myComparator = new SortByYear();
+        Collections.sort(myAuto, myComparator);
+        // Display the cars
+        for (AutoMobile a : myAuto) {
+            System.out.println(a.brand + " " + a.model + " " + a.year);
+        }
+
+        // Use of Comparable
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("Alice", 25));
+        people.add(new Person("Bob", 30));
+        people.add(new Person("Charlie", 20));
+
+        Collections.sort(people);  // Sort by age (natural ordering)
+        for (Person person : people) {
+            System.out.println(person.name + " " + person.age);
+        }
     }
 
     public static void PackageFunc() {
